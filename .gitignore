@@ -1,0 +1,27 @@
+# mac
+.DS_Store
+
+# env files
+.env
+
+# airflow
+airflow/logs/
+airflow/__pycache__/
+airflow/.DS_Store
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+.venv*/
+.envrc
+
+# ide
+.vscode/
+.idea/
+
+# local databases (later)
+*.duckdb
+*.db
