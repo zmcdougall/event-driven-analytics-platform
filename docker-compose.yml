@@ -24,12 +24,13 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
       AIRFLOW__API__AUTH_BACKENDS: airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session
-      _PIP_ADDITIONAL_REQUIREMENTS: "boto3"
+      _PIP_ADDITIONAL_REQUIREMENTS: "boto3 duckdb requests"
     user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-0}"
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
+      - ./duckdb:/opt/airflow/duckdb
     ports:
       - "8080:8080"
     command: webserver
@@ -46,6 +47,7 @@ services:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
+      - ./duckdb:/opt/airflow/duckdb
     command: scheduler
     restart: unless-stopped
 
@@ -65,6 +67,7 @@ services:
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
+      - ./duckdb:/opt/airflow/duckdb
     command: version
 
   minio:
@@ -83,3 +86,4 @@ services:
 volumes:
   postgres-db-volume:
   minio-data:
+ 

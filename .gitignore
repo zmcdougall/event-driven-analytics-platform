@@ -26,3 +26,5 @@ __pycache__/
 *.duckdb
 *.db
 .mc/
+duckdb/
+duckdb/
